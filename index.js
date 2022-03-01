@@ -23,7 +23,7 @@ function(Map, Color, Graphic, SimpleMarkerSymbol, Extent, webMercatorUtils, Poin
   });
 
   map.on('click', function(evt) {
-    
+    console.log('evt', evt);
     map.graphics.clear();
     antipodeMap.graphics.clear();
 
@@ -49,10 +49,14 @@ function(Map, Color, Graphic, SimpleMarkerSymbol, Extent, webMercatorUtils, Poin
       longitud = centerLatLong[0] - 180;
     }
    
-    var center2WebMercator = webMercatorUtils.lngLatToXY(longitud, latitud);
-    var center2 = new Point(center2WebMercator[0], center2WebMercator[1], map.spatialReference);	
+    // Opt1 - Transformándolo de nuevo a WebMercator
+    // var center2WebMercator = webMercatorUtils.lngLatToXY(longitud, latitud);
+    // var center2 = new Point(center2WebMercator[0], center2WebMercator[1], map.spatialReference);	
 
+    // Opt2 - Utilizando longitud y latitud
+    var center2 = new Point(longitud, latitud)
 
+    // Simbología Antípodas
     var antipodeSymbol = new SimpleMarkerSymbol();
     antipodeSymbol.setSize(12);
     antipodeSymbol.setColor(new Color([237, 33, 216, 1]));
